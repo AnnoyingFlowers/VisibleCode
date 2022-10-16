@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="right">
+        <div class="info">
+            <div class="info-content">
+                <p>欢迎来到Visible Code代码统计平台</p>
+                <p>这里是一些网站的介绍捏~</p>
+                <p>这里是一些网站的介绍捏~</p>
+                <p>这里是一些网站的介绍捏~</p>
+            </div>
+            <div class="bord">
+                <p>公告</p>
+            </div>
+        </div>
+        <div class="footer">
+            <button class="btn ToUpload" id="btnToUpload"><span class="iconfont icon-dengpao"></span>上传代码</button>
+            <button class="btn ToResult" id="btnToResult"><span class="iconfont icon-tubiao-bingtu"></span>生成图表</button>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script type="text/javascript">
+
+        $(function () {
+            bindBtnToUploadEvent();
+            bindBtnToResultEvent();
+        })
+
+        function bindBtnToUploadEvent() {
+            $('#btnToUpload').click(function () {
+                window.location.href = '/upload/upload_list/'
+            })
+        }
+
+        function bindBtnToResultEvent() {
+            $('#btnToResult').click(function () {
+                window.location.href = '/chart/chart_list/'
+            })
+        }
+
+    </script>
+
+{% endblock %}

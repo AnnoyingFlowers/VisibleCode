@@ -1,0 +1,259 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Vc代码统计平台</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+        }
+
+        .topHeader {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            background-color: rgb(155, 221, 247);
+            width: 100%;
+            height: 7vh;
+        }
+
+        .topHeader .username {
+            margin-right: 4vw;
+            font-size: 2vh;
+        }
+
+        .topHeader .iconfont {
+            margin-right: 10px;
+            font-size: 2vh;
+        }
+
+        .topHeader .exit {
+            margin-right: 2vw;
+        }
+
+        .bigBox {
+            height: 93vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .left {
+            width: 20vw;
+            height: 100vh;
+            /* background-color: skyblue; */
+        }
+
+        .right {
+            width: 80vw;
+            height: 100vh;
+            background-color: rgb(255, 255, 255);
+        }
+
+        .logo {
+            height: 25vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: skyblue;
+        }
+
+        .list {
+            height: 75vh;
+            background-color: #f5f5f5;
+        }
+
+        .list ul {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            list-style: none;
+            padding-top: 20px;
+        }
+
+        .list ul li {
+            width: 70%;
+            margin: 2px 20px;
+            padding: 0 50px;
+            height: 6vh;
+            line-height: 6vh;
+            border-radius: 10px;
+            text-align: left;
+            /* background-color: rgb(154, 154, 155); */
+        }
+
+        .list ul li .iconfont {
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        .list ul li .null {
+            margin-left: 28px;
+        }
+
+        .list ul .child {
+            display: none;
+            height: 6vh;
+            margin-left: 120px;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 20vh 2vw 5vh 10vw;
+            font-size: 4vh;
+        }
+
+        .info-left {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .bord {
+            width: 30vw;
+            height: 30vh;
+            margin-left: 5vw;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 2px 2px 10px #444444;
+        }
+
+        .footer {
+            width: 80%;
+            margin: 10vh 10%;
+        }
+
+        .btn:not(.btn-info) {
+            width: 20vw;
+            height: 7vh;
+            background-color: #1e80ff;
+            border: none;
+            color: #fff;
+            font-size: 4vh;
+            margin: 1vh 5vw;
+        }
+
+        .btn .iconfont {
+            font-size: 4vh;
+            margin-right: 15px;
+        }
+
+        .btn:hover {
+            background-color: #2E93FD;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+
+        <!-- 侧边栏 -->
+        <nav id="sidebar">
+
+            <div>
+                <!--这按钮不知道放哪里合适...-->
+                <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                    <i class="glyphicon glyphicon-align-left"></i>
+                </button>
+            </div>
+
+            <div class="sidebar-header">
+
+                <h3>Visible Code <br> 代码统计平台</h3>
+                <strong>
+                    <img style="width: 39px; height: 30px;" src="{% static 'img/VC.png' %}" alt="VC">
+                </strong>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a id="toIndex" href="/index/">
+                        <i class="glyphicon glyphicon-home"></i>
+                        主页
+                    </a>
+                </li>
+
+                <li>
+                    <a id="toUpload" href="/upload/upload_list/">
+                        <i class="glyphicon glyphicon-briefcase"></i>
+                        代码上传
+                    </a>
+                </li>
+
+                <li>
+                    <a id="toResult" href="/chart/chart_list/">
+                        <i class="glyphicon glyphicon-duplicate"></i>
+                        图表生成
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false">
+                        <i class="glyphicon glyphicon-link"></i>
+                        关于本站
+                    </a>
+                    <ul class="collapse list-unstyled" id="aboutSubmenu">
+                        <li>
+                            <a id="toTeam" href="/index/team/">
+                                <i class="glyphicon glyphicon-paperclip"></i>
+                                团队成员
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="toLink" href="/index/link/">
+                                <i class="glyphicon glyphicon-send"></i>
+                                友情链接
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content Holder -->
+        <div id="content">
+
+            {% block content %}{% endblock %}
+
+        </div>
+    </div>
+
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap Js CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+
+    {% block script %}{% endblock %}
+
+</body>
+</html>
