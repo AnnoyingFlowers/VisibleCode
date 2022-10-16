@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container">
+    （可以搞一个进度条，进度条走完再显示这些信息）
+        <form method="post">
+            {% csrf_token %}
+            <div>{{ path }}</div>
+            <div>{{ complex_res }}</div>
+            <div>{{ complex_num }}</div>
+            <div>{{ complex_sum }}</div>
+            <a href="/chart/chart_list/">点击生成图表</a>
+        </form>
+    </div>
+{% endblock %}
