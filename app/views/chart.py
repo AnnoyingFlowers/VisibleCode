@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 from app.models import McCabe
+from app.utils.directoryReader import read_directory
 
 
 def chart_list(request):
@@ -90,5 +91,27 @@ def chart_line(request):
             'x_axis': x_axis,
             'series_data': series_data,
         }
+    }
+    return JsonResponse(result)
+
+
+def upload_tree(request):
+    path = request.session.get('path')
+    data_list = []
+    read_directory(path, data_list)
+    result = {
+        'status': True,
+        'data_list': data_list
+    }
+    return JsonResponse(result)
+
+
+def upload_treemap(request):
+    path = request.session.get('path')
+    data_list = []
+    read_directory(path, data_list)
+    result = {
+        'status': True,
+        'data_list': data_list
     }
     return JsonResponse(result)

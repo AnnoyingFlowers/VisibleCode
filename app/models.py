@@ -17,6 +17,7 @@ class Upload(models.Model):
         (6, 'C#'),
         (7, '其他'),
     )
+    nid = models.CharField(verbose_name='nid', default=0, max_length=64)
     language = models.IntegerField(verbose_name='语言', choices=language_choices, default=1)
     file = models.FileField(verbose_name='文件', max_length=128, upload_to='files',
                             validators=[validators.FileExtensionValidator(['zip'])])

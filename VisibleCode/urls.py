@@ -35,6 +35,8 @@ urlpatterns = [
 
     # 分析界面
     path('upload/upload_list/', upload.upload_list),
+    path('chart/upload_tree/', chart.upload_tree),
+    path('chart/upload_treemap/', chart.upload_treemap),
 
     # 图表界面
     path('chart/chart_list/', chart.chart_list),
